@@ -2,7 +2,27 @@ body {
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
+body > * {
+  margin: auto;
+}
 
 a {
   color: #00B7FF;
+}
+
+form {
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+form > * {
+  margin:0.5em;
+}
+div {
+  max-width: 60%;
+  display: flex;
+  flex-direction: column;
+}
+div > * {
+  margin:0.5em;
 }
