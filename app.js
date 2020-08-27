@@ -1,8 +1,13 @@
+
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env')})
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var session = require('express-session')
+var passport = require('passport')
+var LocalStratergy = require('passport-local')
 
 var indexRouter = require('./routes/index');
 
@@ -17,7 +22,41 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session(
+  {
+    secret: process.env.SECRET,
+    cookie: {maxAge:60000},
+    resave: false,
+    saveUninitialized: false,
+  }
+))
 
+//PlaceHolder Auth, replace with db integration or something
+/**
+ * Called with passport.authenticate()
+ *  
+ * If a user valid, a callback is called (`cb(null, user)`) with the user
+ * object.  The user object is then serialized with `passport.serializeUser()` and added to the 
+ * `req.session.passport` object. 
+ */
+passport.use(new LocalStratergy(
+  (uname,password,cb) => {
+    if (password == process.env.KEY) {
+      return cb(null, {uname:uname,password:password});
+    }
+    return cb(null, false);
+  }
+))
+passport.serializeUser((user, cb) => {
+  cb(null, user.uname)
+})
+passport.deserializeUser((user, cb)=>{
+  cb(null, {username:user,password:process.env.KEY})
+})
+app.use(passport.initialize());
+app.use(passport.session());
+
+//Routes
 app.use('/', indexRouter);
 
 // catch 404 and forward to error handler
