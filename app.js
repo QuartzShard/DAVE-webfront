@@ -8,6 +8,7 @@ var logger = require('morgan');
 var session = require('express-session')
 var passport = require('passport')
 var LocalStratergy = require('passport-local')
+var db = require('./db/db')
 
 var indexRouter = require('./routes/index');
 
@@ -41,18 +42,29 @@ app.use(session(
  */
 passport.use(new LocalStratergy(
   (uname,password,cb) => {
-    if (password == process.env.KEY) {
-      return cb(null, {uname:uname,password:password});
-    }
+    db.get('users').findOne({username:uname},(err,user)=>{
+      if (err) return cb(err, false)
+      if (password == user.password) {
+        return cb(null, user);
+      }
     return cb(null, false);
+    })
   }
 ))
+
+
 passport.serializeUser((user, cb) => {
-  cb(null, user.uname)
+  //cb(null, user.username)
+  cb(null,user.id)
 })
+
 passport.deserializeUser((user, cb)=>{
-  cb(null, {username:user,password:process.env.KEY})
+  db.get('users').findOne({_id:user},(err,user)=>{
+    if (err) return cb(err, false)
+    return cb(null, user);
+  })
 })
+
 app.use(passport.initialize());
 app.use(passport.session());
 
