@@ -14,7 +14,7 @@ router.post('/',passport.authenticate('local',{
   failureRedirect:'/',
   successRedirect:'/menu'
 }),function(req,res,next) {
-  if (err) next(err)
+  res.end()
 })
 
 router.get('/menu', function(req,res,next) {
