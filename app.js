@@ -32,14 +32,6 @@ app.use(session(
   }
 ))
 
-//PlaceHolder Auth, replace with db integration or something
-/**
- * Called with passport.authenticate()
- *  
- * If a user valid, a callback is called (`cb(null, user)`) with the user
- * object.  The user object is then serialized with `passport.serializeUser()` and added to the 
- * `req.session.passport` object. 
- */
 passport.use(new LocalStratergy(
   (uname,password,cb) => {
     db.get('users').findOne({username:uname},(err,user)=>{
