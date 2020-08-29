@@ -10,8 +10,6 @@ var passport = require('passport')
 var LocalStratergy = require('passport-local')
 var db = require('./db/db')
 
-var indexRouter = require('./routes/index');
-
 var app = express();
 
 // view engine setup
@@ -61,8 +59,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 //Routes
-app.use('/', indexRouter);
-
+app.use('/', require('./routes/index'));
+app.use('/app', require('./routes/approutes'))
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
