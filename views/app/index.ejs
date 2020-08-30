@@ -7,7 +7,7 @@
     <div class="mdc-card main">
       <h1><%= title %></h1>
       <% buttons.forEach(button => { %>
-        <a href="app/<%= button %>"><button class="mdc-button mdc-button--raised"><%= button %></button></a>
+        <a href="app/<%= button %>" class=linkbutton><button class="mdc-button mdc-button--raised"><%= button %></button></a>
       <% }) %>
     </div>
     <% include ../partials/footer %>

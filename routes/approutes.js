@@ -23,7 +23,7 @@ router.get('/',function(req,res,next){
   var pages = fs.readdirSync(path.join(__dirname, '../views/app')).filter(file => file.endsWith('.ejs'));
   for (let page of pages) {
       if (page != "index.ejs") {
-        buttons.push(page)
+        buttons.push(page.slice(0,-4))
     }
   }
   res.render('app/index', {title: 'Drink and Vibe Engine Web Console', buttons:buttons})

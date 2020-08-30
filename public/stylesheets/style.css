@@ -1,4 +1,5 @@
 body {
+  background: aliceblue;
   padding: 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
@@ -16,6 +17,13 @@ a {
 }
 .main > * {
   margin:0.5em;
+}
+
+.linkbutton {
+  text-decoration: none;
+}
+.linkbutton > * {
+  width:100%;
 }
 @media only screen and (min-width: 600px) {
   .main {
