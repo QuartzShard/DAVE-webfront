@@ -13,7 +13,7 @@ router.get('/', function(req, res, next) {
  /* POST login */
 router.post('/',[body(['username','password']).escape().exists()],passport.authenticate('local',{ 
   failureRedirect:'/',
-  successRedirect:'/app/menu'
+  successRedirect:'/app'
 }),function(req,res,next) {
   res.end()
 })
