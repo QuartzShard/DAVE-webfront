@@ -18,11 +18,11 @@ router.use(function(req,res,next){
 })
 
 router.get('/menu', function(req,res,next) {
-      res.render('menu',{ title: 'Drink and Vibe Engine Web Console' }) 
+      res.render('app/menu',{ title: 'Drink and Vibe Engine Web Console' }) 
 })
 
 router.get('/newuser', function(req,res,next) {
-  res.render('newUser',{ title: 'Drink and Vibe Engine Web Console' }) 
+  res.render('app/newUser',{ title: 'Drink and Vibe Engine Web Console' }) 
 })
 
 router.post('/newuser',[body(['username','password']).escape().exists()], function(req,res,next){
