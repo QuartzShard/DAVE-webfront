@@ -4,6 +4,9 @@
     <% include ../partials/head %>
   </head>
   <body>
+    <header>
+      <a href="/logout" class=linkbutton><button class="mdc-button mdc-button--raised">Log Out</button></a>
+    </header>
     <div class="mdc-card main">
       <h1><%= title %></h1>
       <% buttons.forEach(button => { %>
