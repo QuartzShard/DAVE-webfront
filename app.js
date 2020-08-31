@@ -34,6 +34,7 @@ passport.use(new LocalStratergy(
   (uname,password,cb) => {
     db.get('users').findOne({username:uname},(err,user)=>{
       if (err) return cb(err, false)
+      if (!user) return cb(null, false)
       if (password == user.password) {
         return cb(null, user);
       }
